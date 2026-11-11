@@ -1,0 +1,6 @@
+{
+  "meta": {
+    "title": "Bark notifications",
+    "description": "Sends a Bark push when DSH needs a decision (approval or question) or when a task/goal finishes, so you can return in time."
+  }
+}

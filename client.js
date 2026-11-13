@@ -26,6 +26,7 @@ window.__ModuleLoader__.load({
     const zh = {
       'summary.off': '未配置 Token，推送停用',
       'summary.on': '推送已启用',
+      'collapse.title': '推送配置',
       'form.deviceKey': 'Bark 设备 Token',
       'form.deviceKeyHint': 'Bark App 首页地址 api.day.app/ 之后的那串字符',
       'form.server': 'Bark 服务器',
@@ -49,6 +50,7 @@ window.__ModuleLoader__.load({
     const en = {
       'summary.off': 'No token configured — pushes disabled',
       'summary.on': 'Pushes enabled',
+      'collapse.title': 'Push settings',
       'form.deviceKey': 'Bark device token',
       'form.deviceKeyHint': 'The string after api.day.app/ in the Bark app home URL',
       'form.server': 'Bark server',
@@ -91,6 +93,14 @@ window.__ModuleLoader__.load({
 .dshbn-note{color:var(--dsw-alias-label-tertiary);font-size:12px;margin:0}
 .dshbn-error{color:var(--dsw-alias-state-danger-default);font-size:12px;margin:0}
 .dshbn-summary{color:var(--dsw-alias-label-tertiary)}
+.dshbn-collapse{border:.5px solid var(--dsw-alias-border-l2);border-radius:10px;background:var(--dsw-alias-bg-primary);max-width:560px}
+.dshbn-collapse>summary{display:flex;align-items:center;gap:8px;padding:9px 12px;cursor:pointer;list-style:none;color:var(--dsw-alias-label-primary);font-size:13px;line-height:20px}
+.dshbn-collapse>summary::-webkit-details-marker{display:none}
+.dshbn-collapse>summary::after{content:'›';margin-left:auto;color:var(--dsw-alias-label-tertiary);transition:transform .15s ease}
+.dshbn-collapse[open]>summary::after{transform:rotate(90deg)}
+@media (hover:hover){.dshbn-collapse>summary:hover{background:var(--dsw-alias-interactive-bg-hover)}}
+.dshbn-collapse-state{color:var(--dsw-alias-label-tertiary);font-size:12px}
+.dshbn-collapse-body{padding:12px;border-top:.5px solid var(--dsw-alias-border-l2)}
 `
 
     const TEXT_FIELDS = [
@@ -239,7 +249,10 @@ window.__ModuleLoader__.load({
       return snapshot
     }
 
-    /** Bundle-page face: pulls the settings form itself via the configForms service. */
+    /** Bundle-page face: pulls the settings form itself via the configForms service.
+    * Collapsed by default behind a native `<details>`; the summary line carries
+    * the live enable state so a closed form still communicates status. The form
+    * stays mounted while hidden, so an in-progress draft survives collapsing. */
     function BarkBundleConfig ({ view, configForms }) {
       useEffect(() => {
         const style = document.createElement('style')
@@ -254,7 +267,17 @@ window.__ModuleLoader__.load({
       if (controller === undefined || state === undefined) {
         return h('div', { className: 'dshbn-form' }, h('p', { className: 'dshbn-note' }, t('form.unavailable')))
       }
-      return h(BarkConfigForm, { view: 'page', form: { state, mutate: (ops, revision) => controller.mutate(ops, revision) } })
+      const ready = state.status === 'ready' && state.value !== undefined
+      const enabled = ready === true && typeof state.value.deviceKey === 'string' && state.value.deviceKey.trim() !== ''
+      return h('details', { className: 'dshbn-collapse' },
+        h('summary', null,
+          h('span', null, t('collapse.title')),
+          ready ? h('span', { className: 'dshbn-collapse-state' }, t(enabled ? 'summary.on' : 'summary.off')) : null,
+        ),
+        h('div', { className: 'dshbn-collapse-body' },
+          h(BarkConfigForm, { view: 'page', form: { state, mutate: (ops, revision) => controller.mutate(ops, revision) } }),
+        ),
+      )
     }
 
     return {

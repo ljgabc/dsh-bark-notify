@@ -1,8 +1,8 @@
-# @local/bark-notify bundle patch.
+# dsh-bark-notify bundle patch.
 #
 # Defaults only. Do NOT put your real device token here: this file is committed
 # to git. Fill the token in the profile's user patch layer instead
-# (~/.dsh/profiles/web/cordis.patch.yml):
+# (~/.dsh/profiles/<profile>/cordis.patch.yml):
 #
 #   - id: bark-notify
 #     config:
@@ -12,7 +12,7 @@
 # from the plugin's Config schema defaults when the Loader reloads it.
 - insert:
     - id: bark-notify
-      name: '@local/bark-notify'
+      name: 'dsh-bark-notify'
       config:
         server: 'https://api.day.app'
         deviceKey: ''

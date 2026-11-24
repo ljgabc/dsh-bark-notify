@@ -1,5 +1,5 @@
 /**
- * Browser half of the @local/bark-notify bundle.
+ * Browser half of the dsh-bark-notify bundle.
  *
  * Registers the plugin's configuration form on the Plugins page: the
  * bark-notify row (bundle page) gains a configure control whose page renders
@@ -13,15 +13,15 @@
  * the `dshbn-` prefix.
  */
 window.__ModuleLoader__.load({
-  id: '@local/bark-notify',
+  id: 'dsh-bark-notify',
   factory (require) {
     const React = require('react')
     const { createElement: h, useState, useEffect } = React
 
     const NS = 'bark-notify'
     const SETTINGS_NAMESPACE = 'bark-notify'
-    const ROW_CONFIG_KEY = '@local/bark-notify#bark-notify'
-    const BUNDLE_CONFIG_KEY = '@local/bark-notify'
+    const ROW_CONFIG_KEY = 'dsh-bark-notify#bark-notify'
+    const BUNDLE_CONFIG_KEY = 'dsh-bark-notify'
 
     const zh = {
       'summary.off': '未配置 Token，推送停用',

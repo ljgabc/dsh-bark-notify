@@ -1,5 +1,5 @@
 /**
- * Host half of the @local/bark-notify bundle.
+ * Host half of the dsh-bark-notify bundle.
  *
  * Sends one Bark push (https://github.com/Finb/bark-server, API v2) at the
  * moments the user must return to the Harness:

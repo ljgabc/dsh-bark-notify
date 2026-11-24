@@ -1,9 +1,31 @@
 {
-  "name": "@local/bark-notify",
+  "name": "dsh-bark-notify",
   "version": "1.0.0",
-  "private": true,
   "type": "module",
-  "description": "Bark push notifications: sends one push when DSH needs a decision (approval or question) or when a task/goal finishes, so the user can return in time.",
+  "description": "Bark push notifications for DeepSeek Harness: sends one push when DSH needs a decision (approval or question) or when a task/goal finishes, so the user can return in time. DSH 的 Bark 推送插件：需要决策（审批或选择）或任务/目标完成时推送提醒，方便及时回来操作。",
+  "keywords": [
+    "dsh-plugin",
+    "deepseek-harness",
+    "deepseek",
+    "bark",
+    "bark-notify",
+    "push-notification",
+    "notification",
+    "ios"
+  ],
+  "license": "MIT",
+  "author": "ljgabc <ljgabc@gmail.com>",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ljgabc/dsh-bark-notify.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ljgabc/dsh-bark-notify/issues"
+  },
+  "homepage": "https://github.com/ljgabc/dsh-bark-notify#readme",
+  "engines": {
+    "dsh": ">=0.2.2-rc.5 <0.3.0"
+  },
   "peerDependencies": {
     "@deepseek-ai/schemastery": ">=3.19.0 <4.0.0"
   },
@@ -13,7 +35,7 @@
     "./locale/*.json": "./locale/*.json",
     "./icon": "./icon.svg"
   },
-  "files": ["index.js", "client.js", "cordis.patch.yml", "locale/*.json", "icon.svg"],
+  "files": ["index.js", "client.js", "cordis.patch.yml", "locale/*.json", "icon.svg", "README.md", "CHANGELOG.md", "LICENSE"],
   "dsh": {
     "bundle": {
       "patch": "./cordis.patch.yml"

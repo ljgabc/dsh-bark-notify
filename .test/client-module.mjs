@@ -28,7 +28,7 @@ const wrapped = `(function(require, window){ ${source}\n })`
 new Function('require', 'window', source)(requireShim, globalWindow)
 
 assertRegistered: {
-  if (registered === null || registered.id !== '@local/bark-notify') {
+  if (registered === null || registered.id !== 'dsh-bark-notify') {
     console.error('FAIL: module did not register', registered)
     process.exit(1)
   }
@@ -56,7 +56,7 @@ if (Array.isArray(plugin.inject) && plugin.inject.includes('slots') && typeof pl
   plugin.apply(fakeCtx)
   const rowConfig = registrations.find(options => options.name === 'plugins.row.config')
   const bundleConfig = registrations.find(options => options.name === 'plugins.bundle.config')
-  const keysOk = rowConfig?.key === '@local/bark-notify#bark-notify' && bundleConfig?.key === '@local/bark-notify'
+  const keysOk = rowConfig?.key === 'dsh-bark-notify#bark-notify' && bundleConfig?.key === 'dsh-bark-notify'
   if (injections.includes('plugins.row.config') && injections.includes('plugins.bundle.config') && keysOk) {
     console.log('OK: module registers; row key =', rowConfig.key, '; bundle key =', bundleConfig.key)
     process.exit(0)

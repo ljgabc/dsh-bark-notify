@@ -147,9 +147,9 @@ export function apply(ctx, config) {
   const readFlag = (name) => field(config[name], true) !== false
 
   if (readDeviceKey() === '') {
-    ctx.logger.warn('bark-notify: deviceKey is empty — pushes are disabled. Set it in the plugin config (Plugins page → bark-notify → 配置).')
+    ctx.logger.warn('dsh-bark-notify: deviceKey is empty — pushes are disabled. Set it in the plugin config (Plugins page → bark-notify → 配置).')
   } else if (readServer() === '' || !/^https?:\/\//u.test(readServer())) {
-    ctx.logger.warn(`bark-notify: server must be an http(s) URL (got ${JSON.stringify(field(config.server, ''))}) — pushes are disabled.`)
+    ctx.logger.warn(`dsh-bark-notify: server must be an http(s) URL (got ${JSON.stringify(field(config.server, ''))}) — pushes are disabled.`)
   }
 
   /** In-flight pushes, so disposal does not cut off a notification mid-flight. */
@@ -180,12 +180,12 @@ export function apply(ctx, config) {
       })
       const text = await response.text().catch(() => '')
       if (!response.ok || !text.includes('"code":200')) {
-        ctx.logger.warn(`bark-notify: push "${payload.title}" failed: HTTP ${response.status} ${truncate(text, 200)}`)
+        ctx.logger.warn(`dsh-bark-notify: push "${payload.title}" failed: HTTP ${response.status} ${truncate(text, 200)}`)
         return
       }
-      ctx.logger.info(`bark-notify: pushed "${payload.title}"`)
+      ctx.logger.info(`dsh-bark-notify: pushed "${payload.title}"`)
     })().catch(error => {
-      ctx.logger.warn(`bark-notify: push "${payload.title}" failed: ${error instanceof Error ? error.message : String(error)}`)
+      ctx.logger.warn(`dsh-bark-notify: push "${payload.title}" failed: ${error instanceof Error ? error.message : String(error)}`)
     }).finally(() => {
       inFlight.delete(push)
     })
@@ -198,7 +198,7 @@ export function apply(ctx, config) {
       Promise.allSettled([...inFlight]),
       new Promise(resolve => setTimeout(resolve, DRAIN_GRACE_MS)),
     ])
-  }, 'bark-notify: drain in-flight pushes')
+  }, 'dsh-bark-notify: drain in-flight pushes')
 
   /**
    * Per-agent turn tracking. Weak so agent disposal garbage-collects entries;

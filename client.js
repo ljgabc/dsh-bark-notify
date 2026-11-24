@@ -2,10 +2,10 @@
  * Browser half of the dsh-bark-notify bundle.
  *
  * Registers the plugin's configuration form on the Plugins page: the
- * bark-notify row (bundle page) gains a configure control whose page renders
+ * dsh-bark-notify row (bundle page) gains a configure control whose page renders
  * this schema-backed form. Values and writes are Host-owned — the props.form
  * face from the plugin manager page (state + mutate over the settings
- * namespace `bark-notify`) — so saving writes the profile patch through the
+ * namespace `dsh-bark-notify`) — so saving writes the profile patch through the
  * standard configuration editor and the Host half picks the volatile values
  * up live, without a restart.
  *
@@ -18,9 +18,9 @@ window.__ModuleLoader__.load({
     const React = require('react')
     const { createElement: h, useState, useEffect } = React
 
-    const NS = 'bark-notify'
-    const SETTINGS_NAMESPACE = 'bark-notify'
-    const ROW_CONFIG_KEY = 'dsh-bark-notify#bark-notify'
+    const NS = 'dsh-bark-notify'
+    const SETTINGS_NAMESPACE = 'dsh-bark-notify'
+    const ROW_CONFIG_KEY = 'dsh-bark-notify#dsh-bark-notify'
     const BUNDLE_CONFIG_KEY = 'dsh-bark-notify'
 
     const zh = {
@@ -285,11 +285,11 @@ window.__ModuleLoader__.load({
       apply (ctx) {
         const locale = ctx.get('locale')
         if (locale !== undefined) {
-          ctx.effect(() => locale.register(NS, { zh, en }), 'bark-notify: dictionaries')
+          ctx.effect(() => locale.register(NS, { zh, en }), 'dsh-bark-notify: dictionaries')
           translate = locale.bind(NS)
         }
         const slots = ctx.get('slots')
-        if (slots === undefined) throw new Error('bark-notify requires the slots service')
+        if (slots === undefined) throw new Error('dsh-bark-notify requires the slots service')
         ctx.effect(() => slots.inject('plugins.row.config', () => slots.register(
           {
             name: 'plugins.row.config',
@@ -297,7 +297,7 @@ window.__ModuleLoader__.load({
             locale: NS,
           },
           BarkConfigForm,
-        )), 'bark-notify: plugins row config')
+        )), 'dsh-bark-notify: plugins row config')
         ctx.effect(() => slots.inject('plugins.bundle.config', () => slots.register(
           {
             name: 'plugins.bundle.config',
@@ -306,7 +306,7 @@ window.__ModuleLoader__.load({
             inject: () => ({ configForms: ctx.get('configForms') }),
           },
           BarkBundleConfig,
-        )), 'bark-notify: plugins bundle config')
+        )), 'dsh-bark-notify: plugins bundle config')
       },
     }
   },

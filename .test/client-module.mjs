@@ -1,4 +1,4 @@
-// Simulate the browser module loader for bark-notify/client.js.
+// Simulate the browser module loader for dsh-bark-notify/client.js.
 import { readFileSync } from 'node:fs'
 
 let registered = null
@@ -56,7 +56,7 @@ if (Array.isArray(plugin.inject) && plugin.inject.includes('slots') && typeof pl
   plugin.apply(fakeCtx)
   const rowConfig = registrations.find(options => options.name === 'plugins.row.config')
   const bundleConfig = registrations.find(options => options.name === 'plugins.bundle.config')
-  const keysOk = rowConfig?.key === 'dsh-bark-notify#bark-notify' && bundleConfig?.key === 'dsh-bark-notify'
+  const keysOk = rowConfig?.key === 'dsh-bark-notify#dsh-bark-notify' && bundleConfig?.key === 'dsh-bark-notify'
   if (injections.includes('plugins.row.config') && injections.includes('plugins.bundle.config') && keysOk) {
     console.log('OK: module registers; row key =', rowConfig.key, '; bundle key =', bundleConfig.key)
     process.exit(0)

@@ -4,14 +4,14 @@
 # to git. Fill the token in the profile's user patch layer instead
 # (~/.dsh/profiles/<profile>/cordis.patch.yml):
 #
-#   - id: bark-notify
+#   - id: dsh-bark-notify
 #     config:
 #       deviceKey: <your-token>
 #
 # An override replaces the complete config object; unset fields are refilled
 # from the plugin's Config schema defaults when the Loader reloads it.
 - insert:
-    - id: bark-notify
+    - id: dsh-bark-notify
       name: 'dsh-bark-notify'
       config:
         server: 'https://api.day.app'

@@ -1,4 +1,4 @@
-// Offline behavioral test for bark-notify/index.js.
+// Offline behavioral test for dsh-bark-notify/index.js.
 // Run: node --import ./.test/register.mjs ./.test/run.mjs
 import assert from 'node:assert/strict'
 import { createServer } from 'node:http'

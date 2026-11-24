@@ -71,7 +71,7 @@ git clone https://github.com/ljgabc/dsh-bark-notify.git && dsh plugin --profile 
 也可以直接写在 profile 的用户 patch 层（`~/.dsh/profiles/<profile>/cordis.patch.yml`）：
 
 ```yaml
-- id: bark-notify
+- id: dsh-bark-notify
   config:
     deviceKey: <your-token>
 ```

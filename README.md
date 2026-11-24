@@ -51,8 +51,10 @@ dsh plugin --profile <你的profile> add dsh-bark-notify
 **方式二：本地目录（开发者）**
 
 ```sh
-git clone https://github.com/ljgabc/dsh-bark-notify.git && dsh plugin --profile <你的profile> add ./dsh-bark-notify
+git clone https://github.com/ljgabc/dsh-bark-notify.git && cd dsh-bark-notify && pnpm install && cd .. && dsh plugin --profile <你的profile> add ./dsh-bark-notify
 ```
+
+> 本地目录方式先跑一次 `pnpm install`：以链接方式安装时 profile 不会安装插件的依赖，需在插件目录内备好。
 
 > 安装或更新后需重启 DSH（profile 在启动期加载）。
 

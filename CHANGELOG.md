@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.1
+
+- 修复：`@deepseek-ai/schemastery` 从 peerDependencies 改为 dependencies。profile 安装不会解析 peer 依赖，导致插件模块从安装位置无法解析 schemastery、激活失败（ERR_MODULE_NOT_FOUND）。改为常规依赖后插件自包含。
+
 ## 1.0.0
 
 - 首次公开 npm 发布（此前自用名为 `@local/bark-notify`）。
